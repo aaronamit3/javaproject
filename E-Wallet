@@ -1,0 +1,156 @@
+import java.util.Scanner;
+class Ewallet
+{
+    static double b=5000;
+    static long pin;
+    public static void main(String[] args) 
+    {
+        System.out.println("Aaron$tark's e-wallet welcomes you !");
+        System.out.println();
+        otp();
+        Scanner scan=new Scanner(System.in);
+        boolean flag=true;
+        while (flag) 
+        {
+            System.out.println("=======================");
+            System.out.println();
+            System.out.println("Press 1 for balance enquiry\nPress 2 for add money\nPress 3 for shopping\nPress any key for exit");
+            System.out.print("Enter input here : ");
+            int s=scan.next().charAt(0);
+            System.out.println();
+            switch (s) 
+            {
+                case '1': balanceEnquiry();
+                break;
+                case '2': addMoney(); 
+                break;
+                case '3': shopping(); 
+                break;        
+                default:
+                flag=false;
+                break;   
+            }
+        }
+
+    }
+    public static void balanceEnquiry()
+    {
+        boolean flag=true;
+        while (flag) 
+        {
+            Scanner scan=new Scanner(System.in);
+            System.out.print("enter wallet pin : ");
+            long rw=scan.nextLong();
+            if (rw==pin) 
+            {
+                System.out.println("your balance is : "+b);
+                flag=false;
+            }
+            else
+            {
+                System.out.println("Enter valid wallet pin");
+            }   
+        }
+    }
+    public static void addMoney()
+    {
+        boolean flag=true;
+        while (flag) 
+        {
+            Scanner scan=new Scanner(System.in);
+            System.out.print("Enter amount : ");
+            double a=scan.nextDouble();
+            System.out.print("Enter wallet pin : ");
+            long pi=scan.nextLong();
+            if (pi==pin) 
+            {
+                if(a>0)
+                {
+                    b=b+a;
+                    System.out.println(a+" is added successfully");
+                    flag=false;
+                }
+                else
+                {
+                    System.out.println("Enter valid amount");
+                }   
+            } 
+            else
+            {
+                System.out.println("Enter valid wallet pin");
+            }  
+        }
+
+    
+    }
+    public static void shopping()
+    {
+        boolean flag=true;
+        while (flag) 
+        {
+            Scanner scan=new Scanner(System.in);
+            System.out.print("Enter paying amount : ");
+            double w =scan.nextDouble();
+            System.out.print("Enter wallet pin : ");
+            long cash=scan.nextLong();
+            if (cash==pin) 
+            {
+               if(w<=b)
+                {
+                    b=b-w;
+                    System.out.println(w+" is paid successfully");
+                    flag=false;
+                }
+                else
+                {
+                    System.err.println("Insufficient balance.");
+                    flag=false;
+                } 
+            } 
+            else 
+            {
+                System.out.println("Enter valid wallet pin");
+            }
+               
+        }   
+    }
+    public static void otp()
+    {
+        boolean flag=true;
+        while (flag) 
+        {
+            System.out.print("Create your wallet pin : ");
+            Scanner scan=new Scanner(System.in);
+            long lg=scan.nextLong();
+            if (lg>=100000l&&lg<=999999l) 
+            {
+                pin=lg;
+                Validation();
+                flag=false;   
+            }
+            else
+            {
+                System.out.print("Enter Valid pin");
+            }
+        }
+    }
+    public static void Validation()
+    {
+        boolean flag=true;
+        while(flag)
+        {
+            System.out.print("Enter confirm pin : ");
+            Scanner scan=new Scanner(System.in);
+            long v =scan.nextLong();
+            if (v==pin) 
+            {
+                System.out.println("Pin created successfully");
+                flag=false;
+            }
+            else 
+            {
+                System.out.println("wrong input");
+            }
+        }
+    }
+}
