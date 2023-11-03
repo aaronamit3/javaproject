@@ -1,0 +1,95 @@
+import java.util.Random;
+import java.util.Scanner;
+class Atm
+{
+	static int password=8886;
+	static double balance=10000;
+	public static void change()
+	{
+		Scanner sc=new Scanner(System.in);
+		Random ran=new Random();
+		int code=ran.nextInt(9999);
+		System.out.println(code);
+		System.out.println("enter the code send to you");
+		int d=sc.nextInt();
+		if(d==code)
+		{
+			System.out.println("enter the new password only digits");
+			int f=sc.nextInt();
+			Atm.password=f;
+			System.out.println("Password changed successfully");
+		}
+		else
+		{
+			System.out.println("invalid code");
+		}
+
+	}
+	public static void pin()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("enter the pin");
+		int pin=sc.nextInt();
+		if(password==pin)
+		{
+			System.out.println("enter 1,2,3 for balance enquiry,withdrawal,cancel respectively");
+			int d=sc.nextInt();
+			switch(d)
+			{
+				case 1:balanceenq();
+					break;
+				case 2:withdrawal();
+					break;
+				case 3:cancel();
+				default:System.out.println("invalid entry");
+			} 
+		}
+		else
+		{
+			System.out.println("Invalid password");
+		}			
+	}
+	public static void balanceenq()
+	{
+		System.out.println(balance);
+	}
+	public static void withdrawal()
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("enter the  withdrawal amount");
+		int d=sc.nextInt();
+		if(d<=balance)
+		{
+			System.out.println("collect the cash\nThe balance amount is:");
+			balance=balance-d;
+		}
+		else
+		{
+			System.out.println("insufficient balance");
+		}
+		balanceenq();
+	}
+	public static void cancel()
+	{
+		System.out.println(" please collect your card");
+		main(null);
+	}
+	public static void main(String [] args)
+	{
+		Scanner sc=new Scanner(System.in);
+		System.out.println("insert the card");
+		System.out.println(" press pin to enter the password");
+		String d=sc.nextLine();
+		if(d=="enter")
+		{
+			pin();
+			
+		}
+		
+		change();
+		pin();
+		balanceenq();	
+		withdrawal();
+		cancel();
+	}
+}
